@@ -40,6 +40,22 @@ const Form = (props) => {
             .catch(err => console.log(err))
     }, [])
 
+    const onDeleteHandler = (_id, index) => {
+        console.log(_id);
+        console.log(index);
+
+        axios.delete(`http://localhost:8000/api/products/${_id}/delete`)
+        .then(res=>{
+            console.log(res);
+            const copyProducts = [...products];
+            copyProducts.splice(index,1);
+            setProducts(copyProducts);
+        })
+        .catch(err=>console.log(err));
+    }
+
+    
+
 
 
     return (
@@ -56,7 +72,7 @@ const Form = (props) => {
             <ul>
                 {
                     products.map((item, i) => {
-                        return <li key={i}><Link to={`/api/products/${item._id}`}>{item.title}</Link></li> 
+                        return <li key={i}><Link to={`/api/products/${item._id}`}>{item.title}</Link><button className='btn btn-warning' onClick={()=>onDeleteHandler(item._id)}>X</button><Link to={`/api/products/${item._id}/update`} className='btn btn primary'>Edit</Link></li>
                     })
 
                 }
