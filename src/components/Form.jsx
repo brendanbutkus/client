@@ -69,10 +69,11 @@ const Form = (props) => {
                     <input type="submit" className="btn btn-lg btn-secondary" name="description" />
                 </div>
             </form>
+            <br /><br />
             <ul>
                 {
                     products.map((item, i) => {
-                        return <li key={i}><Link to={`/api/products/${item._id}`}>{item.title}</Link><button className='btn btn-warning' onClick={()=>onDeleteHandler(item._id)}>X</button><Link to={`/api/products/${item._id}/update`} className='btn btn primary'>Edit</Link></li>
+                        return <p key={i}><Link to={`/api/products/${item._id}`}>{item.title}</Link><button className='btn btn-danger' onClick={()=>onDeleteHandler(item._id)}>X</button><Link to={`/api/products/${item._id}/update`} className='btn btn-primary'>Edit</Link></p>
                     })
 
                 }

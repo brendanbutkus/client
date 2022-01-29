@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -25,8 +25,10 @@ const Edit = (props) => {
             .then(res => {
                 console.log(res);
                 setEdits([...edits, res.data.results]);
+                
             })
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
+            
     }
 
     const onChangeHandler = (event) => {
@@ -47,6 +49,7 @@ const Edit = (props) => {
                     <input type="submit" className="btn btn-lg btn-secondary" name="description" />
                 </div>
             </form>
+            
             </div>
 
         )
