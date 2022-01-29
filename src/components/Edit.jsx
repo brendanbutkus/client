@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import axios from 'axios';
 
 
@@ -7,14 +7,17 @@ const Edit = (props) => {
     const [edits, setEdits] = useState({});
     // const [forms, setForms] = useState({})
     const {_id} = useParams();
+    const history = useHistory()
 
     useEffect (() => {
         axios.get(`http://localhost:8000/api/products/${_id}`)
         .then(res => {
             console.log(res);
             setEdits(res.data.results)
+            
         })
         .catch(err => console.log(err));
+        
     }, [_id])
 
     const onSubmitHandler = (event) => {
@@ -27,6 +30,7 @@ const Edit = (props) => {
                 setEdits([...edits, res.data.results]);
                 
             })
+            history.push("/")
             .catch(err => console.log(err));
             
     }
@@ -40,7 +44,7 @@ const Edit = (props) => {
 
         return(
             <div className="App w-50 mx-auto">
-            <h1>Product Manager</h1>
+            <h1>Edit Product</h1>
             <form onSubmit={onSubmitHandler}>
                 <div className="col">
                     <input type="text" value={edits.title} name="title" className='form-control mb-5' onChange={onChangeHandler} placeholder="product title" />
